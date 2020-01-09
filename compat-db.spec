@@ -8,7 +8,7 @@
 Summary: The Berkeley DB database compatibility library
 Name: compat-db
 Version: 4.6.21
-Release: 15%{?dist}
+Release: 17%{?dist}
 Source0: http://download.oracle.com/berkeley-db/db-%{db42_version}.tar.gz
 Source1: http://download.oracle.com/berkeley-db/db-%{db43_version}.tar.gz
 
@@ -110,6 +110,12 @@ for version in %{db4_versions} ; do
 	mkdir build_unix
 	cd build_unix
 	ln -s ../configure
+
+    unset LIBSO_LIBS
+    unset LIBXSO_LIBS
+    export LIBSO_LIBS=-lpthread
+    export LIBXSO_LIBS=-lpthread
+
 	%configure --prefix=%{_prefix} \
 		--enable-compat185 \
 		--enable-shared --disable-static \
@@ -222,6 +228,13 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_includedir}/db%{db43_version}
 
 %changelog
+* Wed Oct 26 2016 Matej Muzila <mmuzila@redhat.com> 4.6.21-17
+- link libdb against -lpthread (#1342461)
+- link c++ code against -lpthread too
+
+* Wed Jul 13 2016 Matej Muzila <mmuzila@redhat.com> 4.6.21-16
+- link libdb against -lpthread (#1342461)
+
 * Fri Jun 02 2010 Jindrich Novy <jnovy@redhat.com> 4.6.21-15
 - add -fno-strict-aliasing (#599376)
 
