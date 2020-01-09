@@ -8,13 +8,14 @@
 Summary: The Berkeley DB database compatibility library
 Name: compat-db
 Version: %{main_version}
-Release: 27%{?dist}
+Release: 28%{?dist}
 Source0: http://download.oracle.com/berkeley-db/db-%{db47_version}.tar.gz
 # license text extracted from tarball
 Source1: LICENSE
 
 Patch3: db-4.5.20-sparc64.patch
 Patch5: db-4.6.21-1.85-compat.patch
+Patch6: compat-db-cppcheck-warnings.patch
 
 # Upstream db-4.7.25 patches
 Patch50: http://www.oracle.com/technology/products/berkeley-db/db/update/%{db47_version}/patch.4.7.25.1
@@ -74,6 +75,7 @@ pushd db-%{db47_version}
 %patch53 -p1 -b .java-api
 %patch3 -p1 -b .sparc64
 %patch5 -p1 -b .compat
+%patch6 -p2 -b .cppcheck-warn
 popd
 
 mkdir docs
@@ -184,6 +186,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/db%{db47_version}
 
 %changelog
+* Tue Aug 19 2014 Jan Stanek <jstanek@redhat.com> - 4.7.25-28
+- Sanity patch for cppcheck detected defects
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 4.7.25-27
 - Mass rebuild 2014-01-24
 
