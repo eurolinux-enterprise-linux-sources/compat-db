@@ -8,7 +8,7 @@
 Summary: The Berkeley DB database compatibility library
 Name: compat-db
 Version: %{main_version}
-Release: 25%{?dist}
+Release: 27%{?dist}
 Source0: http://download.oracle.com/berkeley-db/db-%{db47_version}.tar.gz
 # license text extracted from tarball
 Source1: LICENSE
@@ -184,6 +184,12 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_libdir}/db%{db47_version}
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 4.7.25-27
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 4.7.25-26
+- Mass rebuild 2013-12-27
+
 * Tue Nov 05 2013 Jan Stanek <jstanek@redhat.com> - 4.7.25-25
 - Fixing forgotten dangling symlinks.
 
